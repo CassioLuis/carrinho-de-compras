@@ -1,0 +1,88 @@
+{
+  "filmes_list": [
+    {
+      "id": 1,
+      "titulo": "Homem-Aranha",
+      "subTitulo": "Sem Volta para Casa",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/DYkDjvdlR4asxPTaVmk_wsgcKkoTNXfEY6q_U9JbR69gVbmw5fua2w6qR3637OpYVSu-LJNU7RVO0P-uOok=w240-h480-rw"
+    },
+    {
+      "id": 1,
+      "titulo": "Dead-Pool 2",
+      "subTitulo": "",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/48OaU2sbdQexOUJbUOxE9mzIKDWMKap-2Y7MWDkrWih8UfAolckCvL0zEXBI_6gaZxbX=w240-h480-rw"
+    },
+    {
+      "id": 1,
+      "titulo": "Top Gun",
+      "subTitulo": "Ases Indomavel",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/Rb1peOLtiQWHXLgSPQf5csKlesD3BCzDHULKg9OoSDpQnVEbVoNQ1leEfAf2997sA0SqK5XXsqYJVkB3Gw=w240-h480-rw"
+    },
+    {
+      "id": 1,
+      "titulo": "Sonic 2",
+      "subTitulo": "O Filme",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/iamOvwpKncypLUAofASDZZXh_XCidWEvB3-jvCOXaGOChRSTYHctMPLQjy3n6L9g11HU2r-APxxDEBr3Ofo=w240-h480-rw"
+    },
+    {
+      "id": 1,
+      "titulo": "Homem-Aranha",
+      "subTitulo": "Sem Volta para Casa",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/DYkDjvdlR4asxPTaVmk_wsgcKkoTNXfEY6q_U9JbR69gVbmw5fua2w6qR3637OpYVSu-LJNU7RVO0P-uOok=w240-h480-rw"
+    },
+    {
+      "id": 1,
+      "titulo": "Homem-Aranha",
+      "subTitulo": "Sem Volta para Casa",
+      "censura": "livre",
+      "categoria": "comedia",
+      "quality": ["hd", "full-hd", "quad-hd"],
+      "preco": {
+        "hd": 10,
+        "full-hd": 20,
+        "quad-hd": 35
+      },
+      "img": "https://play-lh.googleusercontent.com/DYkDjvdlR4asxPTaVmk_wsgcKkoTNXfEY6q_U9JbR69gVbmw5fua2w6qR3637OpYVSu-LJNU7RVO0P-uOok=w240-h480-rw"
+    }
+  ]
+}
