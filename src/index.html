@@ -13,8 +13,8 @@
   <body>
     <div class="h-[100vh] flex flex-col">
       <nav id="tamanho" class="bg-gray-400 h-[10vh] px-5 flex justify-end items-center">
-				<div onclick="abreCarrinho()" class="bg-gray-300 flex justify-center rounded-full p-2 shadow-inner cursor-pointer drop-shadow-newShadow relative">
-					<span class="notificacao hidden font-bold text-center flex items-center justify-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
+				<div onclick="abreCarrinho()" class="bg-gray-200 flex justify-center rounded-full p-2 shadow-inner cursor-pointer drop-shadow-newShadow relative hover:bg-gray-300 ease-in duration-200">
+					<span class="notificacao flex hidden font-bold text-center items-center justify-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
 					</span>
 					<span class="material-symbols-outlined select-none drop-shadow-3xl hover:font-bold">shopping_cart</span>
 				</div>
@@ -31,49 +31,6 @@
               </div>
             </div>
           </div>
-          <div id="modal" class="bg-black/[.60] h-full w-full top-0 hidden justify-center items-center absolute">
-            <div id="filho-modal" class="bg-gray-300 p-6 rounded flex justify-between gap-3">
-              <!-- caontainer-esquerdo -->
-							<div class="container-img flex">  
-								<img class="modal-img rounded bg-gray-200"></img>
-							</div>
-							<!-- caontainer-direito -->
-							<div class="flex flex-col justify-between">
-								<div>
-									<div >
-										<div class="flex justify-between">
-											<h1 class="modal-titulo font-bold"></h1>
-											<button onclick="fechaModal()" class="text-red-600 px-2 rounded text-sm hover:bg-gray-400 ease-in duration-200 box-border">
-												Cancelar
-											</button>											
-										</div>
-										<p class="modal-subtitulo text-sm"></p>
-										<p class="modal-price font-bold text-xl mt-2"></p>
-									</div>
-								</div>
-								<div class="flex flex-col gap-3">
-									<div class="text-xs">
-										<p class="text-gray-500 font-bold text-xs">resolução</p>
-										<div class="select-resolucao rounded flex bg-orange-400 p-1 shadow-sm ">
-											<input type="button" class="resolucao hidden px-2 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 hover:text-white rounded font-bold flex-grow-[1]"/>
-										</div>
-									</div>
-									<div>
-										<p class="text-xs text-gray-500 font-bold">dias</p>
-										<div class="container-qtd-button rounded h-6 flex items-center justify-center bg-orange-400 text-xs font-bold shadow-sm">
-											<input onclick="decrement()" value="-" type="button" class="decrement flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
-											<input readonly value="1" type="number" class="content focus:outline-none text-center w-10 bg-orange-400 border-x border-orange-600"/>
-											<input onclick="increment()" value="+" type="button" class="increment flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
-										</div>
-									</div>
-									<div>
-										<input type="button" value="Colocar no carrinho" onclick="addCarrinho()" class="add-carrinho px-6 py-2 cursor-pointer ease-in duration-200 bg-green-600 hover:bg-green-700 rounded text-white font-bold w-full">
-									</div>
-								</div>
-							</div>	
-						</div>
-					</div>
-				</div>
 				<!-- CARRINHO -->
 				<aside class="carrinho right-0 flex bg-gray-200 h-full w-[600px] flex-col absolute">
 					<div class="carrinho-items h-[80vh] overflow-auto p-6">
@@ -127,5 +84,49 @@
 		</div>
     <script type="text/javascript" src="filmes.js"></script>
     <script type="text/javascript" src="main.js"></script>
+		<!-- MODAL -->
+			<div id="modal" class="bg-black/[.60] h-full w-full top-0 hidden justify-center items-center absolute">
+				<div id="filho-modal" class="bg-gray-300 p-6 rounded flex justify-between gap-3">
+					<!-- caontainer-esquerdo -->
+					<div class="container-img flex">  
+						<img class="modal-img rounded bg-gray-200"></img>
+					</div>
+					<!-- caontainer-direito -->
+					<div class="flex flex-col justify-between">
+						<div>
+							<div >
+								<div class="flex justify-between">
+									<h1 class="modal-titulo font-bold"></h1>
+									<button onclick="fechaModal()" class="text-red-600 px-2 rounded text-sm hover:bg-gray-400 ease-in duration-200 box-border">
+										Cancelar
+									</button>											
+								</div>
+								<p class="modal-subtitulo text-sm"></p>
+								<p class="modal-price font-bold text-xl mt-2"></p>
+							</div>
+						</div>
+						<div class="flex flex-col gap-3">
+							<div class="text-xs">
+								<p class="text-gray-500 font-bold text-xs">resolução</p>
+								<div class="select-resolucao rounded flex bg-orange-400 p-1 shadow-sm ">
+									<input type="button" class="resolucao hidden px-2 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 hover:text-white rounded font-bold flex-grow-[1]"/>
+								</div>
+							</div>
+							<div>
+								<p class="text-xs text-gray-500 font-bold">dias</p>
+								<div class="container-qtd-button rounded h-6 flex items-center justify-center bg-orange-400 text-xs font-bold shadow-sm">
+									<input onclick="decrement()" value="-" type="button" class="decrement flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
+									<input readonly value="1" type="number" class="content focus:outline-none text-center w-10 bg-orange-400 border-x border-orange-600"/>
+									<input onclick="increment()" value="+" type="button" class="increment flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
+								</div>
+							</div>
+							<div>
+								<input type="button" value="Colocar no carrinho" onclick="addCarrinho()" class="add-carrinho px-6 py-2 cursor-pointer ease-in duration-200 bg-green-600 hover:bg-green-700 rounded text-white font-bold w-full">
+							</div>
+						</div>
+					</div>	
+				</div>
+			</div>
+		</div>
   </body>
 </html>
