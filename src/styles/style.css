@@ -7,26 +7,6 @@
     @apply bg-orange-700 text-white;
   }
 } */
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-}
-
-.carrinho,
-#modal {
-  -webkit-transition: all 0.5s 0s ease-in;
-  -moz-transition: all 0.5s 0s ease-in;
-  -o-transition: all 0.5s 0s ease-in;
-  transition: all 0.5s 0s ease-in;
-}
-.btn-focus {
-  background-color: rgb(194 65 12);
-  color: white;
-}
-.btn-focus:hover {
-  background-color: rgb(194 65 12) !important;
-}
-
 * {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -36,11 +16,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   height: 100vh;
-}
-* {
-  box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -59,9 +37,28 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
+}
+
+.carrinho,
+#modal {
+  -webkit-transition: all 0.5s 0s ease-in;
+  -moz-transition: all 0.5s 0s ease-in;
+  -o-transition: all 0.5s 0s ease-in;
+  transition: all 0.5s 0s ease-in;
+}
+.btn-focus {
+  background-color: rgb(194 65 12);
+  color: white;
+}
+.btn-focus:hover {
+  background-color: rgb(194 65 12) !important;
 }
 
 .carrinho {

@@ -14,7 +14,7 @@
     <div class="h-[100vh] flex flex-col">
       <nav id="tamanho" class="bg-gray-400 h-[10vh] px-5 flex justify-end items-center">
 				<div onclick="abreCarrinho()" class="bg-gray-200 flex justify-center rounded-full p-2 shadow-inner cursor-pointer drop-shadow-newShadow relative hover:bg-gray-300 ease-in duration-200">
-					<span class="notificacao flex hidden font-bold text-center items-center justify-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
+					<span class="notificacao flex invisible font-bold text-center items-center justify-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
 					</span>
 					<span class="material-symbols-outlined select-none drop-shadow-3xl hover:font-bold">shopping_cart</span>
 				</div>
@@ -22,8 +22,9 @@
       <div class="bg-gray-100 flex overflow-x-hidden h-full relative">
         <div class="flex flex-col w-full overflow-y-auto">
           <header class="bg-gray-300 px-10 py-5 h-[5vh] leading-3">Filmes</header>
+					<!-- CONTAINER FILMES -->
           <div class="container-filmes pt-6 px-[2vw] justify-center grid gap-5 grid-cols-auto-fit">
-            <div class="card-filme hidden flex container-filme p-3 w-full flex-col justify-between items-center hover:drop-shadow-sm border cursor-pointer">
+            <div class="card-filme first:hidden flex container-filme p-3 w-full flex-col justify-between items-center hover:drop-shadow-sm border cursor-pointer">
               <img src="" alt="img-filme" class="img-filme max-w-[213.7px] w-auto max-h-[307.23px] h-auto" />
               <div class="flex justify-center flex-col py-2">
                 <h1 class="titulo-filme text-center font-bold"></h1>
@@ -82,8 +83,6 @@
 				</aside>
 			</div>
 		</div>
-    <script type="text/javascript" src="filmes.js"></script>
-    <script type="text/javascript" src="main.js"></script>
 		<!-- MODAL -->
 			<div id="modal" class="bg-black/[.60] h-full w-full top-0 hidden justify-center items-center absolute">
 				<div id="filho-modal" class="bg-gray-300 p-6 rounded flex justify-between gap-3">
@@ -109,7 +108,7 @@
 							<div class="text-xs">
 								<p class="text-gray-500 font-bold text-xs">resolução</p>
 								<div class="select-resolucao rounded flex bg-orange-400 p-1 shadow-sm ">
-									<input type="button" class="resolucao hidden px-2 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 hover:text-white rounded font-bold flex-grow-[1]"/>
+									<input type="button" class="resolucao first:hidden px-2 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 hover:text-white rounded font-bold flex-grow-[1]"/>
 								</div>
 							</div>
 							<div>
@@ -128,5 +127,7 @@
 				</div>
 			</div>
 		</div>
+    <script type="text/javascript" src="filmes.js"></script>
+    <script type="text/javascript" src="main.js"></script>		
   </body>
 </html>

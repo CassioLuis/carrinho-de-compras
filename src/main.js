@@ -16,7 +16,6 @@ let preco = filmes_list[key].priceResol[0].price;
 
 filmes_list.map((filme, index) => {
   let card = select(".container-filmes .card-filme").cloneNode(true);
-  card.classList.remove("hidden");
   card.setAttribute("key", index);
   card.querySelector(".img-filme").src = filme.img;
   card.querySelector(".titulo-filme").innerHTML = filme.titulo;
@@ -36,7 +35,6 @@ filmes_list.map((filme, index) => {
 
     filmes_list[key].priceResol.map((resol, indexResol) => {
       let resolucao = select(".resolucao").cloneNode(true);
-      resolucao.classList.remove("hidden");
       preco = filmes_list[key].priceResol[0].price;
       quantidade = 1;
       select(".modal-price").innerHTML = convertBrl(preco);
@@ -88,6 +86,17 @@ const decrement = () => {
     attPreco(quantidade);
   }
 };
+// const decrement = () => {
+//   let e = select(".decrement");
+//   e.addEventListener("click", (el) => {
+//     console.log(el.target.nextSibling);
+//     // if (select(".content").value > 1) {
+//     //   select(".content").value--;
+//     //   quantidade = select(".content").value;
+//     //   attPreco(quantidade);
+//     // }
+//   });
+// };
 const increment = () => {
   if (select(".content").value < 5) {
     select(".content").value++;
