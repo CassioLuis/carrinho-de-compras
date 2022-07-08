@@ -1,3 +1,5 @@
+// import filmes from "./filmes.json" assert { type: "json" };
+
 const select = (e) => document.querySelector(e);
 const selectAll = (e) => document.querySelectorAll(e);
 
@@ -13,25 +15,28 @@ let key = 0;
 let resolKey = 0;
 let quantidade = 1;
 let preco = filmes_list[key].priceResol[0].price;
+const filtroModal = select(".filtro-modal");
 
 filmes_list.map((filme, index) => {
-  let card = select(".container-filmes .card-filme").cloneNode(true);
-  card.setAttribute("key", index);
-  card.querySelector(".img-filme").src = filme.img;
-  card.querySelector(".titulo-filme").innerHTML = filme.titulo;
-  card.querySelector(".subtitulo-filme").innerHTML = filme.subTitulo;
-  select(".container-filmes").append(card);
+  let cardClone = select(".container-filmes .card-filme").cloneNode(true);
+  cardClone.setAttribute("key", index);
+  cardClone.querySelector(".img-filme").src = filme.img;
+  cardClone.querySelector(".titulo-filme").innerHTML = filme.titulo;
+  cardClone.querySelector(".subtitulo-filme").innerHTML = filme.subTitulo;
+  select(".container-filmes").append(cardClone);
 
-  card.addEventListener("click", (e) => {
+  cardClone.addEventListener("click", (e) => {
     key = e.target.closest(".card-filme").getAttribute("key");
     select(".modal-titulo").innerHTML = filmes_list[key].titulo;
     select(".modal-subtitulo").innerHTML = filmes_list[key].subTitulo;
     select(".modal-img").src = filmes_list[key].img;
+    select(".modal").classList.remove("hidden");
+    select(".modal").classList.add("flex");
+    filtroModal.style.display = "block";
     setTimeout(() => {
-      select("#modal").classList.remove("hidden");
-      select("#modal").classList.add("flex");
-      select("#modal").style.opacity = 1;
-    }, 0);
+      select(".modal").style.opacity = "1";
+      filtroModal.style.opacity = "1";
+    });
 
     filmes_list[key].priceResol.map((resol, indexResol) => {
       let resolucao = select(".resolucao").cloneNode(true);
@@ -48,10 +53,12 @@ filmes_list.map((filme, index) => {
 });
 
 const fechaModal = () => {
-  select("#modal").style.opacity = 0;
-  select("#modal").classList.remove("flex");
-  select("#modal").classList.add("hidden");
+  select(".modal").style.opacity = 0;
+  select(".modal").classList.remove("flex");
+  select(".modal").classList.add("hidden");
+  filtroModal.style.opacity = "0";
   setTimeout(() => {
+    filtroModal.style.display = "none";
     selectAll(".remover").forEach((e) => e.remove());
     select(".content").value = 1;
   }, 100);
@@ -131,11 +138,33 @@ const mapeiaCarrinho = () => {
 };
 
 const removeItem = () => {
-  select(".remove-btn").addEventListener("click", (e) => {
-    console.log(e.target);
-  });
+  select(".remove-btn").addEventListener("click", (e) => {});
 };
 
 const abreCarrinho = () => {
-  select(".carrinho").classList.toggle("-mr-[600px]");
+  const element = select(".carrinho");
+  const margin = select(".carrinho").style.marginRight;
+  const filtroCarrinho = select(".filtro-carrinho");
+
+  if (!margin) {
+    element.style.marginRight = "0px";
+    filtroCarrinho.style.display = "block";
+    setTimeout(() => {
+      filtroCarrinho.style.opacity = "1";
+    });
+  }
+  if (margin === "-600px") {
+    element.style.marginRight = "0px";
+    filtroCarrinho.style.display = "block";
+    setTimeout(() => {
+      filtroCarrinho.style.opacity = "1";
+    });
+  }
+  if (margin === "0px") {
+    element.style.marginRight = "-600px";
+    setTimeout(() => {
+      filtroCarrinho.style.display = "none";
+    }, 200);
+    filtroCarrinho.style.opacity = "0";
+  }
 };

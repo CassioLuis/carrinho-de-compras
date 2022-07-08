@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        "auto-fit": "repeat(auto-fit, minmax(240px, 240px))",
+        "auto-fit": "repeat(auto-fit, minmax(213.67px, 213.67px))",
       },
       dropShadow: {
         "3xl":
