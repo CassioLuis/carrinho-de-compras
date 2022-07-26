@@ -1,8 +1,5 @@
 // import filmes from "./filmes.json" assert { type: "json" };
 
-const select = (e) => document.querySelector(e);
-const selectAll = (e) => document.querySelectorAll(e);
-
 const convertBrl = (val) => {
   return val.toLocaleString("pt-BR", {
     style: "currency",
@@ -10,72 +7,82 @@ const convertBrl = (val) => {
   });
 };
 
+const select = (e) => document.querySelector(e);
+const selectAll = (e) => document.querySelectorAll(e);
+
 let carrinho = [];
 let key = 0;
 let resolKey = 0;
 let quantidade = 1;
 let preco = filmes_list[key].priceResol[0].price;
-const filtroModal = select(".filtro-modal");
 
-filmes_list.map((filme, index) => {
+const criaCardsFilmes = filmes_list.map((filme, index) => {
   let cardClone = select(".container-filmes .card-filme").cloneNode(true);
   cardClone.setAttribute("key", index);
   cardClone.querySelector(".img-filme").src = filme.img;
   cardClone.querySelector(".titulo-filme").innerHTML = filme.titulo;
   cardClone.querySelector(".subtitulo-filme").innerHTML = filme.subTitulo;
   select(".container-filmes").append(cardClone);
-
-  cardClone.addEventListener("click", (e) => {
-    key = e.target.closest(".card-filme").getAttribute("key");
-    select(".modal-titulo").innerHTML = filmes_list[key].titulo;
-    select(".modal-subtitulo").innerHTML = filmes_list[key].subTitulo;
-    select(".modal-img").src = filmes_list[key].img;
-    select(".modal").classList.remove("hidden");
-    select(".modal").classList.add("flex");
-    filtroModal.style.display = "block";
-    setTimeout(() => {
-      select(".modal").style.opacity = "1";
-      filtroModal.style.opacity = "1";
-    });
-
-    filmes_list[key].priceResol.map((resol, indexResol) => {
-      let resolucao = select(".resolucao").cloneNode(true);
-      preco = filmes_list[key].priceResol[0].price;
-      quantidade = 1;
-      select(".modal-price").innerHTML = convertBrl(preco);
-      resolucao.setAttribute("resol-key", indexResol);
-      resolucao.setAttribute("value", resol.resolucao);
-      resolucao.classList.add("remover");
-      select(".select-resolucao").append(resolucao);
-      selectResolucao();
-    });
-  });
+  return cardClone;
 });
+
+const criaOpcoesDeResolucao = () => {
+  filmes_list[key].priceResol.map((resol, indexResol) => {
+    let resolucao = select(".resolucao").cloneNode(true);
+    preco = filmes_list[key].priceResol[0].price;
+    quantidade = 1;
+    select(".modal-price").innerHTML = convertBrl(preco);
+    resolucao.setAttribute("resol-key", indexResol);
+    resolucao.setAttribute("value", resol.resolucao);
+    resolucao.classList.add("remover");
+    select(".select-resolucao").append(resolucao);
+    seletorDeResolucao();
+  });
+};
+
+const criaModalComItem = (e) => {
+  key = e.target.closest(".card-filme").getAttribute("key");
+  select(".modal-titulo").innerHTML = filmes_list[key].titulo;
+  select(".modal-subtitulo").innerHTML = filmes_list[key].subTitulo;
+  select(".modal-img").src = filmes_list[key].img;
+  select(".modal").classList.remove("hidden");
+  select(".modal").classList.add("flex");
+  setTimeout(() => {
+    select(".fundo-escuro-modal").style.display = "block";
+    select(".fundo-escuro-modal").style.opacity = "1";
+    select(".modal").style.opacity = "1";
+  });
+  criaOpcoesDeResolucao();
+};
+
+for (let card of criaCardsFilmes) {
+  card.addEventListener("click", criaModalComItem);
+}
 
 const fechaModal = () => {
   select(".modal").style.opacity = 0;
   select(".modal").classList.remove("flex");
   select(".modal").classList.add("hidden");
-  filtroModal.style.opacity = "0";
+  select(".fundo-escuro-modal").style.opacity = "0";
   setTimeout(() => {
-    filtroModal.style.display = "none";
+    select(".fundo-escuro-modal").style.display = "none";
     selectAll(".remover").forEach((e) => e.remove());
-    select(".content").value = 1;
-  }, 100);
+    select(".modal-qtd").value = 1;
+  });
 };
 
-const selectResolucao = () => {
-  const elementos = selectAll(".resolucao");
+const seletorDeResolucao = () => {
+  const resolucoes = selectAll(".resolucao");
 
-  for (let el of elementos) {
-    el.addEventListener("click", () => {
-      for (let remov of elementos) {
+  for (let resolucao of resolucoes) {
+    resolucao.addEventListener("click", () => {
+      for (let remov of resolucoes) {
         remov.classList.remove("btn-focus");
       }
-      el.classList.add("btn-focus");
-      resolKey = el.getAttribute("resol-key");
+      resolucao.classList.add("btn-focus");
+      resolKey = resolucao.getAttribute("resol-key");
       preco = filmes_list[key].priceResol[resolKey].price;
-      quantidade = select(".content").value;
+      quantidade = parseInt(select(".modal-qtd").value);
       attPreco(quantidade);
     });
   }
@@ -86,85 +93,144 @@ const attPreco = (qtd) => {
   select(".modal-price").innerHTML = convertBrl(preco);
 };
 
-const decrement = () => {
-  if (select(".content").value > 1) {
-    select(".content").value--;
-    quantidade = select(".content").value;
-    attPreco(quantidade);
-  }
-};
-// const decrement = () => {
-//   let e = select(".decrement");
-//   e.addEventListener("click", (el) => {
-//     console.log(el.target.nextSibling);
-//     // if (select(".content").value > 1) {
-//     //   select(".content").value--;
-//     //   quantidade = select(".content").value;
-//     //   attPreco(quantidade);
-//     // }
-//   });
-// };
-const increment = () => {
-  if (select(".content").value < 5) {
-    select(".content").value++;
-    quantidade = select(".content").value;
+const modalDecrement = () => {
+  if (select(".modal-qtd").value > 1) {
+    select(".modal-qtd").value--;
+    quantidade = parseInt(select(".modal-qtd").value);
     attPreco(quantidade);
   }
 };
 
-const addCarrinho = () => {
-  carrinho.push({
-    id: parseInt(key),
-    resolucao: parseInt(resolKey),
-    quantidade: parseInt(quantidade),
-  });
-  let notific = carrinho.length;
-  select(".notificacao").classList.remove("hidden");
-  select(".notificacao").innerHTML = notific;
+const modalIncrement = () => {
+  if (select(".modal-qtd").value < 5) {
+    select(".modal-qtd").value++;
+    quantidade = parseInt(select(".modal-qtd").value);
+    attPreco(quantidade);
+  }
+};
+
+select(".modal-decrement").addEventListener("click", modalDecrement);
+
+select(".modal-increment").addEventListener("click", modalIncrement);
+
+const addArrayCarrinho = () => {
+  let idCarrinho = `${key}@${resolKey}`;
+  let itemCarrinho = carrinho.findIndex(
+    (item) => item.idCarrinho === idCarrinho
+  );
+
+  itemCarrinho > -1
+    ? ((carrinho[itemCarrinho].quantidade += quantidade),
+      (carrinho[itemCarrinho].preco =
+        filmes_list[key].priceResol[resolKey].price *
+        carrinho[itemCarrinho].quantidade))
+    : carrinho.push({
+        idCarrinho,
+        filmeKey: parseInt(key),
+        resolucao: parseInt(resolKey),
+        quantidade: parseInt(quantidade),
+        preco,
+        titulo: filmes_list[key].titulo,
+        subTitulo: filmes_list[key].subTitulo,
+      });
   fechaModal();
-  mapeiaCarrinho();
+  insereItensNaTelaCarrinho();
 };
 
-const mapeiaCarrinho = () => {
+const insereItensNaTelaCarrinho = () => {
+  select(".carrinho-items").innerHTML = "";
+
   carrinho.map((item, index) => {
     let cardCart = select(".card-cart").cloneNode(true);
+    let valorUnitario = item.preco / item.quantidade;
+
+    cardCart.classList.remove("hidden");
     cardCart.setAttribute("key", index);
-    cardCart.querySelector(".img-card-cart").src = filmes_list[item.id].img;
+    cardCart.querySelector(".img-card-cart").src =
+      filmes_list[item.filmeKey].img;
+    cardCart.querySelector(".valor-item").innerHTML = convertBrl(item.preco);
+    cardCart.querySelector(".titulo-item").innerHTML = item.titulo;
+    cardCart.querySelector(".sub-titulo").innerHTML = item.subTitulo;
+    cardCart.querySelector(".carrinho-qtd").value = item.quantidade;
     select(".carrinho-items").append(cardCart);
-
-    console.log(carrinho);
-    console.log(cardCart.querySelector(".img-card-cart"));
-  }, carrinho.length);
+    cardCart
+      .querySelector(".carrinho-decrement")
+      .addEventListener("click", () => {
+        item.quantidade > 1 ? item.quantidade-- : item.quantidade;
+        item.preco = item.quantidade * valorUnitario;
+        insereItensNaTelaCarrinho();
+      });
+    cardCart
+      .querySelector(".carrinho-increment")
+      .addEventListener("click", () => {
+        item.quantidade < 5 ? item.quantidade++ : item.quantidade;
+        item.preco = item.quantidade * valorUnitario;
+        insereItensNaTelaCarrinho();
+      });
+    cardCart.querySelector(".remove-btn").addEventListener("click", (e) => {
+      e.target.closest(".card-cart").style.marginRight = "-100px";
+      const atrib = e.target.closest(".card-cart").getAttribute("key");
+      carrinho.splice(atrib, 1);
+      e.target.closest(".card-cart").remove();
+      insereItensNaTelaCarrinho();
+    });
+  });
+  select(".notificacao").classList.remove("hidden");
+  select(".notificacao").innerHTML =
+    carrinho.length || select(".notificacao").classList.add("hidden");
+  atualizaTotaisCarrinho();
+  console.log(carrinho);
 };
 
-const removeItem = () => {
-  select(".remove-btn").addEventListener("click", (e) => {});
+const atualizaTotaisCarrinho = () => {
+  const totalizador = carrinho.reduce((acc, curr) => {
+    return acc + curr.preco;
+  }, 0);
+  select(".total-compra").innerHTML = convertBrl(totalizador);
 };
+
+// const removeItem = () => {
+//   setTimeout(() => {
+//     select(".remove-btn").addEventListener("click", (e) => {
+//       console.log(e);
+//     });
+//   }, 200);
+// };
 
 const abreCarrinho = () => {
-  const element = select(".carrinho");
-  const margin = select(".carrinho").style.marginRight;
-  const filtroCarrinho = select(".filtro-carrinho");
+  const carrinho = select(".carrinho");
+  const marginCarrinho = select(".carrinho").style.marginRight;
+  const fundoEscuroCarrinho = select(".fundo-escuro-carrinho");
 
-  if (!margin) {
-    element.style.marginRight = "0px";
-    filtroCarrinho.style.display = "block";
+  if (!marginCarrinho) {
+    carrinho.style.marginRight = "0px";
+    fundoEscuroCarrinho.style.display = "block";
     setTimeout(() => {
-      filtroCarrinho.style.opacity = "1";
+      fundoEscuroCarrinho.style.opacity = "1";
     });
   }
-  if (margin === "-600px") {
-    element.style.marginRight = "0px";
-    filtroCarrinho.style.display = "block";
+  if (marginCarrinho === "-600px") {
+    carrinho.style.marginRight = "0px";
+    fundoEscuroCarrinho.style.display = "block";
     setTimeout(() => {
-      filtroCarrinho.style.opacity = "1";
+      fundoEscuroCarrinho.style.opacity = "1";
     });
   }
-  if (margin === "0px") {
-    element.style.marginRight = "-600px";
+  if (marginCarrinho === "0px") {
+    carrinho.style.marginRight = "-600px";
     setTimeout(() => {
-      filtroCarrinho.style.display = "none";
+      fundoEscuroCarrinho.style.display = "none";
     }, 200);
-    filtroCarrinho.style.opacity = "0";
+    fundoEscuroCarrinho.style.opacity = "0";
   }
 };
+
+const alternaTema = () => {
+  const toggle = select(".toggle");
+  toggle.onclick = () => {
+    select(".toggle-indicator").classList.toggle("active");
+    select("body").classList.toggle("dark");
+  };
+};
+
+alternaTema();

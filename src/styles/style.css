@@ -63,18 +63,17 @@ input::-webkit-inner-spin-button {
 
 .carrinho {
   transition: all 0.25s;
-  /*position: absolute;
-  right: 0;
-  height: 100%;*/
 }
 
 .carrinho.preEnter,
 .carrinho.exiting {
-  //right: -600px;
   margin-right: -600px;
 }
 
+.active {
+  left: 40%;
+  transition: 0.5s;
+}
 .carrinho.exited {
-  //right: -600px;
   margin-right: -600px;
 }
