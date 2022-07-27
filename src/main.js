@@ -192,7 +192,9 @@ const abreCarrinho = () => {
   const carrinho = select(".carrinho");
   const marginCarrinho = select(".carrinho").style.marginRight;
   const fundoEscuroCarrinho = select(".fundo-escuro-carrinho");
+  const larguraCarrinho = select(".carrinho");
 
+  console.dir(larguraCarrinho);
   if (!marginCarrinho) {
     carrinho.style.marginRight = "0px";
     fundoEscuroCarrinho.style.display = "block";
@@ -225,3 +227,7 @@ const alternaTema = () => {
 };
 
 alternaTema();
+
+const pirataria = () => {
+  alert("DIGA NÃO A PIRATARIA");
+};

@@ -14,7 +14,7 @@ const filmes_list = [
     img: "https://play-lh.googleusercontent.com/DYkDjvdlR4asxPTaVmk_wsgcKkoTNXfEY6q_U9JbR69gVbmw5fua2w6qR3637OpYVSu-LJNU7RVO0P-uOok=w240-h480-rw",
   },
   {
-    titulo: "Dead-Pool 2",
+    titulo: "Deadpool 2",
     subTitulo: "",
     censura: "livre",
     categoria: "super heróis",
