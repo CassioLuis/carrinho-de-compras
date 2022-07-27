@@ -189,14 +189,6 @@ const atualizaTotaisCarrinho = () => {
   select(".total-compra").innerHTML = convertBrl(totalizador);
 };
 
-// const removeItem = () => {
-//   setTimeout(() => {
-//     select(".remove-btn").addEventListener("click", (e) => {
-//       console.log(e);
-//     });
-//   }, 200);
-// };
-
 const abreCarrinho = () => {
   const carrinho = select(".carrinho");
   const marginCarrinho = select(".carrinho").style.marginRight;
