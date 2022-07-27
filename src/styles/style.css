@@ -16,7 +16,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+img {
+  max-width: none;
+}
 body {
   height: 100vh;
 }
@@ -81,5 +83,10 @@ input::-webkit-inner-spin-button {
 @media (max-width: 600px) {
   .carrinho {
     width: 100vw;
+  }
+  .container-modal {
+    flex-direction: column;
+    //width: 100vw;
+    align-items: center;
   }
 }
