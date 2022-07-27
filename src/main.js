@@ -93,7 +93,7 @@ const attPreco = (qtd) => {
   select(".modal-price").innerHTML = convertBrl(preco);
 };
 
-const modalDecrement = () => {
+const modalDecrementQTD = () => {
   if (select(".modal-qtd").value > 1) {
     select(".modal-qtd").value--;
     quantidade = parseInt(select(".modal-qtd").value);
@@ -101,7 +101,7 @@ const modalDecrement = () => {
   }
 };
 
-const modalIncrement = () => {
+const modalIncrementQTD = () => {
   if (select(".modal-qtd").value < 5) {
     select(".modal-qtd").value++;
     quantidade = parseInt(select(".modal-qtd").value);
@@ -109,9 +109,8 @@ const modalIncrement = () => {
   }
 };
 
-select(".modal-decrement").addEventListener("click", modalDecrement);
-
-select(".modal-increment").addEventListener("click", modalIncrement);
+select(".modal-decrement").addEventListener("click", modalDecrementQTD);
+select(".modal-increment").addEventListener("click", modalIncrementQTD);
 
 const addArrayCarrinho = () => {
   let idCarrinho = `${key}@${resolKey}`;
@@ -137,6 +136,14 @@ const addArrayCarrinho = () => {
   insereItensNaTelaCarrinho();
 };
 
+const removeItemTelaCarrinho = (e) => {
+  e.target.closest(".card-cart").style.marginRight = "-100px";
+  const atrib = e.target.closest(".card-cart").getAttribute("key");
+  carrinho.splice(atrib, 1);
+  e.target.closest(".card-cart").remove();
+  insereItensNaTelaCarrinho();
+};
+
 const insereItensNaTelaCarrinho = () => {
   select(".carrinho-items").innerHTML = "";
 
@@ -152,7 +159,6 @@ const insereItensNaTelaCarrinho = () => {
     cardCart.querySelector(".titulo-item").innerHTML = item.titulo;
     cardCart.querySelector(".sub-titulo").innerHTML = item.subTitulo;
     cardCart.querySelector(".carrinho-qtd").value = item.quantidade;
-    select(".carrinho-items").append(cardCart);
     cardCart
       .querySelector(".carrinho-decrement")
       .addEventListener("click", () => {
@@ -167,21 +173,18 @@ const insereItensNaTelaCarrinho = () => {
         item.preco = item.quantidade * valorUnitario;
         insereItensNaTelaCarrinho();
       });
-    cardCart.querySelector(".remove-btn").addEventListener("click", (e) => {
-      e.target.closest(".card-cart").style.marginRight = "-100px";
-      const atrib = e.target.closest(".card-cart").getAttribute("key");
-      carrinho.splice(atrib, 1);
-      e.target.closest(".card-cart").remove();
-      insereItensNaTelaCarrinho();
-    });
+    cardCart
+      .querySelector(".remove-btn")
+      .addEventListener("click", removeItemTelaCarrinho);
+    select(".carrinho-items").append(cardCart);
   });
   select(".notificacao").classList.remove("hidden");
   select(".notificacao").innerHTML =
     carrinho.length || select(".notificacao").classList.add("hidden");
-  atualizaTotaisCarrinho();
+  atualizaTotalCompra();
 };
 
-const atualizaTotaisCarrinho = () => {
+const atualizaTotalCompra = () => {
   const totalizador = carrinho.reduce((acc, curr) => {
     return acc + curr.preco;
   }, 0);

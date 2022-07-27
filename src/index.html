@@ -12,13 +12,13 @@
 	</head>
   <body class="dark select-none">
     <div class="h-[100vh] flex flex-col relative overflow-hidden">
-      <nav id="tamanho" class="bg-gray-400 dark:bg-zinc-700 h-[10vh] px-5 flex justify-between items-center">
+      <nav id="tamanho" class="bg-gray-400 dark:bg-zinc-700 h-[10vh] px-6 flex justify-between items-center">
 				<div class="toggle cursor-pointer">
 					<div class="bg-gray-300 dark:bg-zinc-400 w-8 h-4 rounded-lg relative">
 						<div class="toggle-indicator rounded-full w-5 h-5 bg-gray-500 absolute top-[-10%] transition-all"></div>
 					</div>
 				</div>
-				<div onclick="abreCarrinho()" class="bg-gray-200 hover:bg-gray-300 dark:bg-zinc-400 dark:hover:bg-zinc-300 flex justify-center items-center rounded-full p-2 drop-shadow-newShadow relative transition-all cursor-pointer">
+				<div onclick="abreCarrinho()" class="bg-gray-200 hover:bg-gray-300 dark:bg-zinc-400 dark:hover:bg-zinc-300 flex justify-center items-center rounded-full p-2 drop-shadow-newShadow relative transition duration-500 cursor-pointer">
 					<span class="notificacao hidden flex font-bold text-center justify-center items-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
 					</span>
 					<span class="material-symbols-outlined select-none drop-shadow-3xl hover:font-bold">shopping_cart</span>
@@ -41,7 +41,7 @@
 			</div>
 			<!-- CARRINHO -->
 			<div onclick="abreCarrinho()" class="fundo-escuro-carrinho opacity-0 h-full hidden w-full bg-black/[.60] absolute grow ease-in duration-200"></div>
-			<aside class="carrinho right-0 flex bg-gray-200 w-[600px] dark:bg-zinc-700 dark:text-zinc-300 flex-col absolute h-full  mr-[-600px]">
+			<aside class="carrinho right-0 flex bg-gray-200 w-[600px] dark:bg-zinc-700 dark:text-zinc-300 flex-col absolute h-full  mr-[-600px] md">
 				<div class="h-[80vh] overflow-auto p-6">
 					<!-- CARD CART -->
 					<div class="hidden card-cart w-full flex justify-between border-b border-gray-300 dark:border-zinc-600 py-6 transition-all">
@@ -66,11 +66,11 @@
 							</div>
 						</div>
 					</div>
-					<div class="flex justify-between">
+					<div class="flex justify-between items-center">
 						<h2 class="font-bold">Carrinho</h2>
-						<div onclick="abreCarrinho()" class="cursor-pointer">
-						X
-						</div>
+						<span onclick="abreCarrinho()" class="material-symbols-outlined p-2 hover:text-zinc-600 hover:bg-zinc-400 cursor-pointer rounded-full transition duration-500">
+						close
+						</span>
 					</div>
 					<div class="carrinho-items">
 					</div>
@@ -81,15 +81,11 @@
 							<p class="font-bold">Subtotal</p>
 							<p class="total-compra font-bold">R$ 0,00</p>
 						</div>
-						<p class="text-sm text-gray text-top -mt-2">
-							Frete e impostos calculados no fechamento da compra
-						</p>
+						<p class="text-sm text-gray text-top -mt-2">Frete e impostos calculados no fechamento da compra</p>
 						<button onclick="pirataria()" class="bg-gray-900 text-white font-bold w-full p-1 rounded">
 							Concluir Compra
 						</button>
-						<p class="text-sm text-gray text-center">
-							ou <strong onclick="abreCarrinho()" class="cursor-pointer">Continuar Comprando</strong>
-						</p>
+						<p class="text-sm text-gray text-center">ou <strong onclick="abreCarrinho()" class="cursor-pointer">Continuar Comprando</strong></p>
 					</div>
 				</div>
 			</aside>

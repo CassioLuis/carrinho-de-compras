@@ -77,3 +77,9 @@ input::-webkit-inner-spin-button {
 .carrinho.exited {
   margin-right: -600px;
 }
+
+@media (max-width: 600px) {
+  .carrinho {
+    width: 100vw;
+  }
+}
