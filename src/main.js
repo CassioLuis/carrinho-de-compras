@@ -179,7 +179,6 @@ const insereItensNaTelaCarrinho = () => {
   select(".notificacao").innerHTML =
     carrinho.length || select(".notificacao").classList.add("hidden");
   atualizaTotaisCarrinho();
-  console.log(carrinho);
 };
 
 const atualizaTotaisCarrinho = () => {
