@@ -16,9 +16,11 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 img {
   max-width: none;
 }
+
 body {
   height: 100vh;
 }
@@ -55,10 +57,12 @@ input::-webkit-inner-spin-button {
   -o-transition: all 0.5s 0s ease-in;
   transition: all 0.5s 0s ease-in;
 }
+
 .btn-focus {
   background-color: rgb(194 65 12);
   color: white;
 }
+
 .btn-focus:hover {
   background-color: rgb(194 65 12) !important;
 }
@@ -66,18 +70,43 @@ input::-webkit-inner-spin-button {
 .carrinho {
   transition: all 0.25s;
 }
-
-.carrinho.preEnter,
-.carrinho.exiting {
-  margin-right: -600px;
+.nav-bar {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
 }
-
-.active {
-  left: 40%;
+.botao-carrinho {
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.6);
+}
+.toggle {
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.6);
   transition: 0.5s;
 }
-.carrinho.exited {
-  margin-right: -600px;
+.toggle-indicator {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+  transition: 0.5s;
+  animation: 0.2s ease-in-out switchOut;
+}
+.active {
+  left: 16px;
+  transition: 0.5s;
+  animation: 0.2s ease-in-out switchIn;
+}
+
+@keyframes switchIn {
+  from {
+    left: 0;
+  }
+  to {
+    left: 16px;
+  }
+}
+
+@keyframes switchOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: 16px;
+  }
 }
 
 @media (max-width: 600px) {

@@ -10,10 +10,12 @@ module.exports = {
       dropShadow: {
         "3xl":
           "0px 0px 3px rgba(0, 0, 0, 0.13), 0px 3px 6px rgba(0, 0, 0, 0.26)",
+        shadowInset: "inset 0 0 5px rgba(0,0,0,.2)",
       },
       fontSize: {
         xxs: ".6rem",
       },
+      shadowInset: {},
     },
   },
   plugins: [],

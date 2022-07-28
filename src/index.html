@@ -10,30 +10,28 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,700;1,700;1,900&display=swap" rel="stylesheet">
 	</head>
-  <body class="dark select-none">
+  <body class="dark select-none transition-colors duration-1000">
     <div class="h-[100vh] flex flex-col relative overflow-hidden">
-      <nav id="tamanho" class="bg-gray-400 dark:bg-zinc-700 h-[10vh] px-6 flex justify-between items-center border-b dark:border-zinc-600">
-				<div class="toggle cursor-pointer">
-					<div class="bg-gray-300 dark:bg-zinc-400 w-8 h-4 rounded-lg relative">
-						<div class="toggle-indicator rounded-full w-5 h-5 bg-gray-500 absolute top-[-10%] transition-all"></div>
-					</div>
+      <nav class="nav-bar bg-gray-400 dark:bg-zinc-700  h-[10vh] px-6 flex justify-between items-center transition-all duration-300">
+				<div class="toggle cursor-pointer w-8 h-4 rounded-lg relative dark:bg-zinc-300 bg-gray-200">
+					<div class="toggle-indicator rounded-full w-4 h-4 bg-gray-500 absolute top-0 scale-125"></div>
 				</div>
-				<div onclick="abreCarrinho()" class="bg-gray-200 hover:bg-gray-300 dark:bg-zinc-400 dark:hover:bg-zinc-300 flex justify-center items-center rounded-full p-2 drop-shadow-newShadow relative transition duration-500 cursor-pointer">
+				<div onclick="abreCarrinho()" class="botao-carrinho bg-gray-200 hover:bg-gray-300 dark:bg-zinc-300 dark:hover:bg-zinc-400 flex justify-center items-center rounded-full p-2 drop-shadow-newShadow relative transition duration-500 cursor-pointer">
 					<span class="notificacao hidden flex font-bold text-center justify-center items-center bg-green-500 h-4 w-4 rounded-full border border-white right-0 bottom-0 absolute text-white text-xxs">
 					</span>
 					<span class="material-symbols-outlined select-none drop-shadow-3xl hover:font-bold">shopping_cart</span>
 				</div>
       </nav>
-      <div class="bg-gray-100 flex overflow-x-hidden h-full relative dark:bg-zinc-800">
-        <div class="flex flex-col w-full overflow-y-auto">
-          <header class="px-10 py-5 h-[5vh] leading-3 border-b-2 dark:border-zinc-700 font-bold dark:text-gray-200">Filmes</header>
+      <div class="bg-gray-100 flex overflow-x-hidden overflow-y-auto h-full relative dark:bg-zinc-800 transition-all duration-300">
+        <div class="flex flex-col w-full">
+          <header class="px-10 py-5 h-[5vh] flex items-center dark:border-zinc-700 font-bold dark:text-gray-200 transition-all duration-300">Filmes</header>
 					<!-- CONTAINER FILMES -->
 					<div class="container-filmes pt-12 px-[2vw] justify-center grid gap-x-4 gap-y-10 grid-cols-auto-fit select-none">
-						<div class="card-filme first:hidden flex container-filme flex-col cursor-pointer group hover:drop-shadow-md ease-in duration-50 p-1 bg-gray-200 dark:bg-zinc-700 rounded border dark:border-zinc-600">
+						<div class="card-filme first:hidden flex container-filme flex-col cursor-pointer group hover:drop-shadow-md p-1 bg-gray-200 dark:bg-zinc-700 rounded border dark:border-zinc-600 transition-all duration-300">
 							<img src="" alt="img-filme" class="img-filme rounded" />
-							<div class="flex justify-center flex-col py-2 dark:bg-zinc-700 w-full grow dark:text-gray-200">
-								<h1 class="titulo-filme text-center font-bold"></h1>
-								<h1 class="subtitulo-filme text-center text-sm"></h1>
+							<div class="flex justify-center flex-col py-2 dark:bg-zinc-700 w-full grow dark:text-gray-200 transition-all duration-300">
+								<h1 class="titulo-filme text-center font-bold dark:text-white transition-all duration-300"></h1>
+								<h1 class="subtitulo-filme text-center text-sm dark:text-zinc-300 transition-all duration-300"></h1>
 							</div>
 						</div>
 					</div>
@@ -48,18 +46,25 @@
 						<div class="rounded bg-gray-200 border border-zinc-300 h-full">
 							<img src="#" alt="img-card-cart" class="img-card-cart h-28 rounded">
 						</div>
-						<div class="w-full h-28 flex pl-3 flex-col justify-between">
+						<div class="w-full flex pl-3 flex-col justify-between">
 							<div class="price flex justify-between">
-								<p class="titulo-item font-bold"></p>
-								<p class="valor-item"></p>
+								<div class="flex flex-col items-start">
+									<p class="titulo-item font-bold dark:text-white"></p>
+									<p class="sub-titulo text-sm"></p>
+								</div>
+								<p class="valor-item font-bold text-lg dark:text-white"></p>
 							</div>
-							<p class="sub-titulo text-sm -mt-10"></p>
 							<div class="flex items-between justify-between">
-								<div class="rounded flex items-center justify-center bg-orange-400 p-1 shadow-sm" >
-									<input value="-" type="button" class="carrinho-decrement flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
-									<input readonly value="1" type="number" class="carrinho-qtd focus:outline-none text-center w-10 bg-orange-400 border-x border-orange-600"/>
-									<input value="+" type="button" class="carrinho-increment flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
-								</div >
+								<div class="flex flex-col items-start gap-2">
+									<div class="rounded bg-orange-400 p-1 shadow-sm">
+										<div class="btn-focus px-2 bg-orange-400 text-white rounded font-bold text-xs basis-auto"></div>
+									</div>
+									<div class="rounded flex items-center justify-center bg-orange-400 shadow-sm text-white" >
+										<input value="-" type="button" class="carrinho-decrement flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
+										<input readonly value="1" type="number" class="carrinho-qtd focus:outline-none text-center w-10 bg-orange-400 border-x border-orange-600"/>
+										<input value="+" type="button" class="carrinho-increment flex-grow-[1] h-full w-5 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 rounded"/>
+									</div>
+								</div>
 								<button class="remove-btn text-red-500 px-2 rounded text-sm hover:bg-gray-300 dark:hover:bg-zinc-500 ease-in duration-200 box-border">
 									remover
 								</button>
@@ -77,44 +82,44 @@
 				</div>
 				<div class="h-[200px] border-t border-gray-300 dark:border-zinc-500 p-6 flex">
 					<div class="w-full flex flex-col justify-between">
-						<div class="flex justify-between">
+						<div class="flex justify-between items-center dark:text-white">
 							<p class="font-bold">Subtotal</p>
-							<p class="total-compra font-bold">R$ 0,00</p>
+							<p class="total-compra font-bold text-xl">R$ 0,00</p>
 						</div>
 						<p class="text-sm text-gray text-top -mt-2">Frete e impostos calculados no fechamento da compra</p>
-						<button onclick="pirataria()" class="bg-gray-900 text-white font-bold w-full p-1 rounded">
+						<button onclick="alerta()" class="bg-green-600 text-white font-bold w-full rounded hover:bg-green-500 transition-all py-2">
 							Concluir Compra
 						</button>
-						<p class="text-sm text-gray text-center">ou <strong onclick="abreCarrinho()" class="cursor-pointer">Continuar Comprando</strong></p>
+						<p class="text-sm text-gray text-center">ou <strong onclick="abreCarrinho()" class="cursor-pointer dark:text-white">Continuar Comprando</strong></p>
 					</div>
 				</div>
 			</aside>
 			<!-- MODAL -->
 			<div onclick="fechaModal()" class="fundo-escuro-modal opacity-0 h-full hidden w-full bg-black/[.60] absolute grow ease-in duration-100"></div>
-			<div class="modal select-none opacity-0 border border-zinc-600 bg-gray-300 dark:bg-zinc-700 dark:text-zinc-300 p-6 rounded flex justify-between gap-3 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ease-in duration-100 ">
+			<div class="modal select-none opacity-0 hidden border border-zinc-600 bg-gray-300 dark:bg-zinc-700 dark:text-zinc-300 p-6 rounded flex justify-between gap-3 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] ease-in duration-100 ">
 				<!-- container-esquerdo -->
-				<button onclick="fechaModal()" class="material-symbols-outlined text-red-400 p-2 rounded text-sm hover:bg-gray-400 dark:bg-zinc-600 dark:hover:bg-zinc-500 ease-in duration-200 box-border absolute right-0 top-0">
+				<button onclick="fechaModal()" class="close-modal material-symbols-outlined text-red-400 p-2 rounded text-sm hover:bg-gray-400 dark:bg-zinc-600 dark:hover:bg-zinc-500 ease-in duration-200 box-border absolute right-0 top-0">
 					close
 				</button>						
 				<div class="container-modal flex justify-between gap-6">
 					<div class="container-img flex flex-col items-center gap-4">
 						<img class="modal-img rounded bg-gray-200 border border-zinc-500"></img>
 						<span class="flex flex-col items-center">
-							<h1 class="modal-titulo font-bold"></h1>
-							<p class="modal-subtitulo text-sm"></p>
+							<h1 class="modal-titulo font-bold dark:text-white"></h1>
+							<p class="modal-subtitulo text-sm dark:text-zinc-300"></p>
 						</span>
 					</div>
 					<!-- container-direito -->
 					<div class="container-direito flex flex-col justify-between w-full">
 						<div>
 							<div class="flex justify-between">
-								<p class="modal-price font-bold text-xl my-2"></p>
+								<p class="modal-price font-bold text-xl my-2 dark:text-white"></p>
 							</div>
 						</div>
 						<div class="flex flex-col gap-3">
 							<div class="text-xs">
 								<p class="text-gray-500 font-bold text-xs dark:text-zinc-300">resolução</p>
-								<div class="select-resolucao rounded flex bg-orange-400 p-1 shadow-sm ">
+								<div class="select-resolucao rounded flex bg-orange-400 p-1 shadow-sm">
 									<input type="button" class="resolucao first:hidden px-2 cursor-pointer ease-in duration-200 bg-orange-400 hover:bg-orange-500 text-white rounded font-bold flex-grow-[1]"/>
 								</div>
 							</div>
@@ -127,7 +132,7 @@
 								</div>
 							</div>
 							<div>
-								<input type="button" value="Colocar no carrinho" onclick="addArrayCarrinho()" class="add-carrinho px-6 py-2 cursor-pointer ease-in duration-200 bg-green-600 hover:bg-green-700 rounded text-white font-bold w-full">
+								<input type="button" value="Colocar no carrinho" onclick="addArrayCarrinho()" class="add-carrinho px-6 py-2 cursor-pointer ease-in duration-200 bg-green-600 hover:bg-green-500 rounded text-white font-bold w-full">
 							</div>
 						</div>
 					</div>	

@@ -122,7 +122,7 @@ const filmes_list = [
     img: "https://play-lh.googleusercontent.com/GNe7re9RcTtOQKiSs7cECt_aTohEgMB-cMwDlaz8Bncpsymmz-sMc8AQ68io5whgw92QiiFgEnCg3MDR01dB=w240-h480-rw",
   },
   {
-    titulo: "Liga da Justiça!",
+    titulo: "Liga da Justiça",
     subTitulo: "Zack Snyder",
     censura: "livre",
     categoria: "super heróis",

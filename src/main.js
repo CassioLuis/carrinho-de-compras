@@ -15,6 +15,7 @@ let key = 0;
 let resolKey = 0;
 let quantidade = 1;
 let preco = filmes_list[key].priceResol[0].price;
+let nomeResolucao = "720p";
 
 const criaCardsFilmes = filmes_list.map((filme, index) => {
   let cardClone = select(".container-filmes .card-filme").cloneNode(true);
@@ -26,11 +27,26 @@ const criaCardsFilmes = filmes_list.map((filme, index) => {
   return cardClone;
 });
 
+const seletorDeResolucao = () => {
+  const resolucoes = selectAll(".resolucao");
+
+  for (let resolucao of resolucoes) {
+    resolucao.addEventListener("click", () => {
+      for (let remov of resolucoes) {
+        remov.classList.remove("btn-focus");
+      }
+      resolucao.classList.add("btn-focus");
+      resolKey = parseInt(resolucao.getAttribute("resol-key"));
+      preco = filmes_list[key].priceResol[resolKey].price;
+      attPreco(quantidade);
+      nomeResolucao = resolucao.value;
+    });
+  }
+};
+
 const criaOpcoesDeResolucao = () => {
   filmes_list[key].priceResol.map((resol, indexResol) => {
     let resolucao = select(".resolucao").cloneNode(true);
-    preco = filmes_list[key].priceResol[0].price;
-    quantidade = 1;
     select(".modal-price").innerHTML = convertBrl(preco);
     resolucao.setAttribute("resol-key", indexResol);
     resolucao.setAttribute("value", resol.resolucao);
@@ -41,6 +57,9 @@ const criaOpcoesDeResolucao = () => {
 };
 
 const criaModalComItem = (e) => {
+  preco = filmes_list[key].priceResol[0].price;
+  quantidade = 1;
+  resolKey = 0;
   key = e.target.closest(".card-filme").getAttribute("key");
   select(".modal-titulo").innerHTML = filmes_list[key].titulo;
   select(".modal-subtitulo").innerHTML = filmes_list[key].subTitulo;
@@ -55,9 +74,13 @@ const criaModalComItem = (e) => {
   criaOpcoesDeResolucao();
 };
 
-for (let card of criaCardsFilmes) {
-  card.addEventListener("click", criaModalComItem);
-}
+const iteraCardsEAddEvent = () => {
+  for (let card of criaCardsFilmes) {
+    card.addEventListener("click", criaModalComItem);
+  }
+};
+
+iteraCardsEAddEvent();
 
 const fechaModal = () => {
   select(".modal").style.opacity = 0;
@@ -71,41 +94,27 @@ const fechaModal = () => {
   });
 };
 
-const seletorDeResolucao = () => {
-  const resolucoes = selectAll(".resolucao");
-
-  for (let resolucao of resolucoes) {
-    resolucao.addEventListener("click", () => {
-      for (let remov of resolucoes) {
-        remov.classList.remove("btn-focus");
-      }
-      resolucao.classList.add("btn-focus");
-      resolKey = resolucao.getAttribute("resol-key");
-      preco = filmes_list[key].priceResol[resolKey].price;
-      quantidade = parseInt(select(".modal-qtd").value);
-      attPreco(quantidade);
-    });
-  }
-};
-
 const attPreco = (qtd) => {
   preco = qtd * filmes_list[key].priceResol[resolKey].price;
   select(".modal-price").innerHTML = convertBrl(preco);
 };
 
+const attQuantidadeEPreco = () => {
+  quantidade = parseInt(select(".modal-qtd").value);
+  attPreco(quantidade);
+};
+
 const modalDecrementQTD = () => {
   if (select(".modal-qtd").value > 1) {
     select(".modal-qtd").value--;
-    quantidade = parseInt(select(".modal-qtd").value);
-    attPreco(quantidade);
+    attQuantidadeEPreco();
   }
 };
 
 const modalIncrementQTD = () => {
   if (select(".modal-qtd").value < 5) {
     select(".modal-qtd").value++;
-    quantidade = parseInt(select(".modal-qtd").value);
-    attPreco(quantidade);
+    attQuantidadeEPreco();
   }
 };
 
@@ -131,48 +140,52 @@ const addArrayCarrinho = () => {
         preco,
         titulo: filmes_list[key].titulo,
         subTitulo: filmes_list[key].subTitulo,
+        nomeResolucao: nomeResolucao,
       });
   fechaModal();
   insereItensNaTelaCarrinho();
+  console.log(carrinho);
 };
 
 const removeItemTelaCarrinho = (e) => {
-  e.target.closest(".card-cart").style.marginRight = "-100px";
   const atrib = e.target.closest(".card-cart").getAttribute("key");
   carrinho.splice(atrib, 1);
   e.target.closest(".card-cart").remove();
   insereItensNaTelaCarrinho();
 };
 
+const decrementQTDCarrinhoTela = (item) => {
+  let valorUnitario = item.preco / item.quantidade;
+  item.quantidade > 1 ? item.quantidade-- : item.quantidade;
+  item.preco = item.quantidade * valorUnitario;
+  insereItensNaTelaCarrinho();
+};
+const incrementQTDCarrinhoTela = (item) => {
+  valorUnitario = item.preco / item.quantidade;
+  item.quantidade < 5 ? item.quantidade++ : item.quantidade;
+  item.preco = item.quantidade * valorUnitario;
+  insereItensNaTelaCarrinho();
+};
+
 const insereItensNaTelaCarrinho = () => {
   select(".carrinho-items").innerHTML = "";
-
   carrinho.map((item, index) => {
     let cardCart = select(".card-cart").cloneNode(true);
-    let valorUnitario = item.preco / item.quantidade;
-
     cardCart.classList.remove("hidden");
     cardCart.setAttribute("key", index);
     cardCart.querySelector(".img-card-cart").src =
       filmes_list[item.filmeKey].img;
+    cardCart.querySelector(".btn-focus").innerHTML = item.nomeResolucao;
     cardCart.querySelector(".valor-item").innerHTML = convertBrl(item.preco);
     cardCart.querySelector(".titulo-item").innerHTML = item.titulo;
     cardCart.querySelector(".sub-titulo").innerHTML = item.subTitulo;
     cardCart.querySelector(".carrinho-qtd").value = item.quantidade;
     cardCart
       .querySelector(".carrinho-decrement")
-      .addEventListener("click", () => {
-        item.quantidade > 1 ? item.quantidade-- : item.quantidade;
-        item.preco = item.quantidade * valorUnitario;
-        insereItensNaTelaCarrinho();
-      });
+      .addEventListener("click", () => decrementQTDCarrinhoTela(item));
     cardCart
       .querySelector(".carrinho-increment")
-      .addEventListener("click", () => {
-        item.quantidade < 5 ? item.quantidade++ : item.quantidade;
-        item.preco = item.quantidade * valorUnitario;
-        insereItensNaTelaCarrinho();
-      });
+      .addEventListener("click", () => incrementQTDCarrinhoTela(item));
     cardCart
       .querySelector(".remove-btn")
       .addEventListener("click", removeItemTelaCarrinho);
@@ -195,9 +208,7 @@ const abreCarrinho = () => {
   const carrinho = select(".carrinho");
   const marginCarrinho = select(".carrinho").style.marginRight;
   const fundoEscuroCarrinho = select(".fundo-escuro-carrinho");
-  const larguraCarrinho = select(".carrinho");
 
-  console.dir(larguraCarrinho);
   if (!marginCarrinho) {
     carrinho.style.marginRight = "0px";
     fundoEscuroCarrinho.style.display = "block";
@@ -225,12 +236,14 @@ const alternaTema = () => {
   const toggle = select(".toggle");
   toggle.onclick = () => {
     select(".toggle-indicator").classList.toggle("active");
-    select("body").classList.toggle("dark");
+    setTimeout(() => {
+      select("body").classList.toggle("dark");
+    });
   };
 };
 
 alternaTema();
 
-const pirataria = () => {
-  alert("DIGA NÃO A PIRATARIA");
+const alerta = () => {
+  alert("Em Breve...");
 };
