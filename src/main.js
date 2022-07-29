@@ -86,8 +86,10 @@ const fechaModal = () => {
   select(".modal").style.opacity = 0;
   select(".modal").classList.remove("flex");
   select(".modal").classList.add("hidden");
+  // select(".modal").classList.remove("scale-0");
   select(".fundo-escuro-modal").style.opacity = "0";
   setTimeout(() => {
+    // select(".modal").classList.add("scale-100");
     select(".fundo-escuro-modal").style.display = "none";
     selectAll(".remover").forEach((e) => e.remove());
     select(".modal-qtd").value = 1;
